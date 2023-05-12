@@ -6,7 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-
+import android.widget.TextView;
+import com.week2.minesweeper2.R;
 import com.week2.minesweeper2.GameEngine;
 
 import org.w3c.dom.Attr;
@@ -17,13 +18,15 @@ public class Grid extends GridView {
     public Grid(Context context, AttributeSet attra) {
         super(context, attra);
         GameEngine.getInstance().createGrid(context);
+
         setNumColumns(GameEngine.WIDTH);
         setAdapter(new GridAdapter());
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
     private class GridAdapter extends BaseAdapter {

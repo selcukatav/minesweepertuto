@@ -3,20 +3,29 @@ package com.week2.minesweeper2.views.grid;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 
 import com.week2.minesweeper2.GameEngine;
 import com.week2.minesweeper2.R;
 
+
 import androidx.core.content.ContextCompat;
 
-public class Cell extends BaseCell implements View.OnClickListener {
-    public Cell(Context context, int position) {
+public class Cell extends BaseCell implements View.OnClickListener, View.OnLongClickListener{
+
+    int BOMB_NUMBER;
+    public Cell(Context context, int x,int y) {
 
         super(context);
-        setPosition(position);
+
+
+        setPosition(x,y);
 
         setOnClickListener(this);
+        setOnLongClickListener(this);
+
+        //Log.i("TAG,", "cell"+x,y);
 
     }
 
@@ -31,7 +40,13 @@ public class Cell extends BaseCell implements View.OnClickListener {
         //when click a button, send info to the game engine.
         GameEngine.getInstance().click(getXPos(), getYPos());
     }
+    @Override
+    public boolean onLongClick(View v) {
+        GameEngine.getInstance().flag(getXPos(),getYPos());
 
+
+        return true;
+    }
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -121,6 +136,7 @@ public class Cell extends BaseCell implements View.OnClickListener {
         drawable.setBounds(0, 0, getWidth(), getHeight());
         drawable.draw(canvas);
     }
+
 
 
 }

@@ -1,27 +1,33 @@
 package com.week2.minesweeper2.util;
 
+import androidx.annotation.NonNull;
+
 import java.util.Random;
 
 public class Generator {
 
-    public static int[][] generate(int bombNumber, final int width, final int height) {
+    public static int[][] generate(int bombNumber,  final int width, final int height) {
         //random generating numbers
         Random r = new Random();
-        int[][] grid = new int[width][height];
-        for (int x = 0; x < width; x++) {
-            grid[x] = new int[height];
+        int[][] grid1 = new int[width][height];
+        for (int x= 0; x < width; x++) {
+            grid1[x] = new int[height];
+
         }
+
         while (bombNumber > 0) {
             int x = r.nextInt(width);
             int y = r.nextInt(height);
             //Checks the mines, if there is no mine; place mine.
-            if (grid[x][y] != -1) {
-                grid[x][y] = -1;
+            if (grid1[x][y] != -1) {
+                grid1[x][y] = -1;
                 bombNumber--;
             }
+
         }
-        grid=calculateNeighbours(grid,width,height);
-        return grid;
+        grid1=calculateNeighbours(grid1,width,height);
+
+        return grid1;
     }
 
     private static int[][] calculateNeighbours(int[][] grid, final int width, final int height) {
@@ -35,28 +41,29 @@ public class Generator {
     }
 
     private static int getNeighbourNumber(final int[][] grid, final int x, final int y, final int width, final int height) {
-        if (grid[x][y] != -1) {
+      if (grid[x][y] == -1) {
             return -1;
         }
-        int count = 0;
-        //at this point, we are counting the empty places around that how many mines around it.
-        if (isMineAt(grid,x-1,y+1,width,height))//top-left
-            count++;
-        if (isMineAt(grid,x,y+1,width,height))//top
-            count++;
-        if (isMineAt(grid,x+1,y+1,width,height))//top-right
-            count++;
-        if (isMineAt(grid,x-1,y,width,height))//left
-            count++;
-        if (isMineAt(grid,x+1,y,width,height))//right
-            count++;
-        if (isMineAt(grid,x,y-1,width,height))//bottom
-            count++;
-        if (isMineAt(grid,x-1,y-1,width,height))//bottom-left
-            count++;
-        if (isMineAt(grid,x+1,y-1,width,height))//bottom-right
-            count++;
-        return count;
+            int count = 0;
+            //at this point, we are counting the empty places around that how many mines around it.
+            if (isMineAt(grid, x - 1, y + 1, width, height))//top-left
+                count++;
+            if (isMineAt(grid, x, y + 1, width, height))//top
+                count++;
+            if (isMineAt(grid, x + 1, y + 1, width, height))//top-right
+                count++;
+            if (isMineAt(grid, x - 1, y, width, height))//left
+                count++;
+            if (isMineAt(grid, x + 1, y, width, height))//right
+                count++;
+            if (isMineAt(grid, x, y - 1, width, height))//bottom
+                count++;
+            if (isMineAt(grid, x - 1, y - 1, width, height))//bottom-left
+                count++;
+            if (isMineAt(grid, x + 1, y - 1, width, height))//bottom-right
+                count++;
+            return count;
+
     }
 
     private static boolean isMineAt(final int[][] grid, final int x, final int y, final int width, final int height) {

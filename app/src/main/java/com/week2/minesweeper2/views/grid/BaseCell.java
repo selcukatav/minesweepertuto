@@ -2,6 +2,7 @@ package com.week2.minesweeper2.views.grid;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.Button;
 
 import com.week2.minesweeper2.GameEngine;
 
@@ -12,9 +13,12 @@ public abstract class BaseCell extends View {
     private boolean isRevealed; //if clicks the not mine button, the all the zeros that connected will be revealed.
     private boolean isClicked;//if the bomb is clicked or not
     private boolean isFlagged;//marking the bomb
+    private int flagCount;
 
     private int x, y;
-
+    public BaseCell(Context context){
+        super(context);
+    }
 
     private int position;
 
@@ -32,6 +36,8 @@ public abstract class BaseCell extends View {
             isBomb = true;
         }
         this.value = value;
+
+
     }
 
     public boolean isBomb() {
@@ -46,8 +52,10 @@ public abstract class BaseCell extends View {
         return isRevealed;
     }
 
-    public void setRevealed(boolean revealed) {
-        isRevealed = revealed;
+    public void setRevealed() {
+
+        isRevealed = true;
+        invalidate();
     }
 
     public boolean isClicked() {
@@ -56,7 +64,7 @@ public abstract class BaseCell extends View {
 
     public void setClicked() {
         this.isClicked = true;
-        this.isRevealed=false;
+        this.isRevealed=true;
         invalidate();
     }
 
@@ -64,11 +72,14 @@ public abstract class BaseCell extends View {
         return isFlagged;
     }
 
-    public void setFlagged(boolean flagged) {
+    public boolean setFlagged(boolean flagged) {
+
         isFlagged = flagged;
+
+        return flagged;
     }
 
-    public int getXPos() {
+    public  int getXPos() {
         return x;
     }
 
@@ -82,17 +93,16 @@ public abstract class BaseCell extends View {
         return position;
     }
 
-    public void setPosition(int position) {
-        this.position = position;
+    public void setPosition(int x,int y) {
+        this.x=x;
+        this.y=y;
 
-        x = position % GameEngine.WIDTH;
-        y = position / GameEngine.HEIGHT;
+        this.position=y*GameEngine.WIDTH+x;
+
 
         invalidate();
     }
 
-    public BaseCell(Context context) {
-        super(context);
-    }
+
 
 }
