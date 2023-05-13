@@ -79,12 +79,13 @@ public abstract class BaseCell extends View {
         return flagged;
     }
 
-    public  int getXPos() {
+    public  int getXPos() { //gets position of Cell[x][]
         return x;
     }
 
 
-    public int getYPos() {
+    public int getYPos() {//gets position of Cell[][y]
+
         return y;
     }
 

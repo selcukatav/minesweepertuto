@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public int BOMB_NUMBER=4;
-    private Cell[][] cells;
+
 
     private int remainingMines;
     Grid grid;
@@ -29,23 +29,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gameplay);
-        textView = findViewById(R.id.bombCounter);
-        textView = findViewById(R.id.timerTxt);
-        grid=findViewById(R.id.mineSweeperGridView);
-        textView=findViewById(R.id.bombCounter);
+        setContentView(R.layout.activity_gameplay);//MineSweeper Grid
+        textView = findViewById(R.id.bombCounter);//Bomb counter text view component.
+        textView = findViewById(R.id.timerTxt);//timer text view
+
+        GameEngine.getInstance().createGrid(this);//creates grid on this activity.
 
 
-
-        remainingMines=BOMB_NUMBER;
-
-        GameEngine.getInstance().createGrid(this);
-
-
-        handler = new Handler(Looper.getMainLooper());
+        handler = new Handler(Looper.getMainLooper()); //handler and runnable: its like try catch func but in android.
         runnable = new Runnable() {
             @Override
             public void run() {
+                //counts up period with 1 sec.
 
                 textView.setText("" + number);
                 number++;
@@ -59,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void restart(View view) {
+    public void restart(View view) { //restarts the game grid view.
         handler.removeCallbacks(runnable);
         number = 0;
         textView.setText("" + number);
@@ -68,20 +63,7 @@ public class MainActivity extends AppCompatActivity {
         GameEngine.getInstance().createGrid(this);
 
     }
-    /*private void calculateRemainingMines() {
-        int flagCount = 0;
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[i].length; j++) {
-                if (cells[i][j].setFlagged(true)) {
-                    flagCount++;
 
-
-                }
-            }
-        }
-        remainingMines = BOMB_NUMBER - flagCount;
-
-    }*/
 
 
 

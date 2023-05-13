@@ -7,7 +7,7 @@ import java.util.Random;
 public class Generator {
 
     public static int[][] generate(int bombNumber,  final int width, final int height) {
-        //random generating numbers
+        //random placing the bombs.
         Random r = new Random();
         int[][] grid1 = new int[width][height];
         for (int x= 0; x < width; x++) {

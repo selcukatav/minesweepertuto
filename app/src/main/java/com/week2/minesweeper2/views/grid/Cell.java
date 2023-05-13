@@ -32,16 +32,19 @@ public class Cell extends BaseCell implements View.OnClickListener, View.OnLongC
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        //redraws the grid
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
     }
 
     @Override
     public void onClick(View v) {
+        //onClick, event of clicking
         //when click a button, send info to the game engine.
         GameEngine.getInstance().click(getXPos(), getYPos());
     }
     @Override
     public boolean onLongClick(View v) {
+        //onLongClick, the event of clicking the button 1 sec or longer.
         GameEngine.getInstance().flag(getXPos(),getYPos());
 
 

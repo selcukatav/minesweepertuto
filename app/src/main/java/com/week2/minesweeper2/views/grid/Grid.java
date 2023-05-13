@@ -15,6 +15,7 @@ import org.w3c.dom.Attr;
 import java.util.jar.Attributes;
 
 public class Grid extends GridView {
+    //In grid, we are building a custom view of grid. With onMeasure method ve give the values of X and Y's. So it builds a custom grid for us.
     public Grid(Context context, AttributeSet attra) {
         super(context, attra);
         GameEngine.getInstance().createGrid(context);
@@ -35,7 +36,6 @@ public class Grid extends GridView {
         public int getCount() {
             return GameEngine.getInstance().WIDTH * GameEngine.getInstance().HEIGHT;
         }
-
         @Override
         public Object getItem(int position) {
             return null;

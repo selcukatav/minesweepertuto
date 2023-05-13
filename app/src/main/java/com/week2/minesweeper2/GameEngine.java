@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.week2.minesweeper2.util.Generator;
 //import com.week2.minesweeper2.util.PrintGrid;
 import com.week2.minesweeper2.util.PrintGrid;
@@ -16,9 +18,7 @@ import com.week2.minesweeper2.views.grid.Grid;
 
 import org.w3c.dom.Text;
 
-public class GameEngine {
-
-
+public class GameEngine  {
 
     private static GameEngine instance;
     public void setNumMines(int BOMB_NUMBER) {
@@ -65,7 +65,7 @@ public class GameEngine {
     }
 
     private void setGrid(Context context, int[][] grid) {
-
+        //gives each cell unique positions and invalidates it.
 
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
@@ -86,16 +86,18 @@ public class GameEngine {
 
 
         return MineSweeperGrid[x][y];
+        //sends to the view
     }
 
     public Cell getCellAt(int x, int y) {
         return MineSweeperGrid[x][y];
+        //gets actual position of the cell. takes it from grid.
     }
 
 
     //onClick event. it checks if the button is pressed or not, if its clicked then you cannot press it again
     public void click(int x, int y) {
-
+        //click event. checks if the click is on the grid and not clicked.
         if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(x, y).isClicked()) {
             getCellAt(x, y).setClicked();
 
@@ -121,6 +123,7 @@ public class GameEngine {
 
     }
     private boolean checkEnd() {
+        //checks is the game reach the end or not. calculates the bombs
         int bombNotFound = BOMB_NUMBER;
         int notRevealed = WIDTH * HEIGHT;
         for (int x = 0; x < WIDTH; x++) {
@@ -137,18 +140,20 @@ public class GameEngine {
         if (bombNotFound == 0 && notRevealed == 0) {
             Toast.makeText(context, "Game Won!", Toast.LENGTH_LONG).show();
 
+
         }
         return false;
     }
 
     public void flag(int x, int y) {
+        //checks the cell if its flagged or not
         boolean isFlagged = getCellAt(x, y).isFlagged();
         getCellAt(x, y).setFlagged(!isFlagged);
         getCellAt(x, y).invalidate();
     }
 
     private void onGameLoss() {
-        //handles when player loses the game
+        //when the player steps on the bomb. game ends.
         Toast.makeText(context, "Game Lost", Toast.LENGTH_LONG).show();
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {

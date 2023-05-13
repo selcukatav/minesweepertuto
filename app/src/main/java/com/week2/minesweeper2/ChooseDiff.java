@@ -10,6 +10,7 @@ import android.widget.Button;
 
 public class ChooseDiff extends AppCompatActivity {
 
+    //With choosing the difficulty we setting the mine number on GameEngine class.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
