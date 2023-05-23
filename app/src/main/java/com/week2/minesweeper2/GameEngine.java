@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.week2.minesweeper2.util.Generator;
@@ -28,6 +28,7 @@ public class GameEngine  {
     public static int WIDTH = 6;
     public static int HEIGHT = 6;
 
+    public static boolean isGameOver = false;
 
     private Context context;
 
@@ -53,10 +54,9 @@ public class GameEngine  {
 
     public void createGrid(Context context) {
         this.context = context;
-
+        isGameOver = false;
 
         //creating the grid and storing it
-
         int[][] generatedGrid = Generator.generate(BOMB_NUMBER, WIDTH, HEIGHT);
 
         PrintGrid.print(generatedGrid, WIDTH, HEIGHT);
@@ -98,27 +98,30 @@ public class GameEngine  {
     //onClick event. it checks if the button is pressed or not, if its clicked then you cannot press it again
     public void click(int x, int y) {
         //click event. checks if the click is on the grid and not clicked.
-        if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(x, y).isClicked()) {
-            getCellAt(x, y).setClicked();
+        if (!isGameOver) {
+            if (x >= 0 && y >= 0 && x < WIDTH && y < HEIGHT && !getCellAt(x, y).isClicked()) {
+                getCellAt(x, y).setClicked();
 
-            if (getCellAt(x, y).getValue() == 0) {
-                for (int xt = -1; xt <= 1; xt++) {
-                    for (int yt = -1; yt <= 1; yt++) {
-                        //checks if there is not mine in neighbours, if there is no mine then click on them too.
-                        if (xt != yt) {
-                            click(x + xt, y + yt);
+                if (getCellAt(x, y).getValue() == 0) {
+                    for (int xt = -1; xt <= 1; xt++) {
+                        for (int yt = -1; yt <= 1; yt++) {
+                            //checks if there is not mine in neighbours, if there is no mine then click on them too.
+                            if (xt != yt) {
+                                click(x + xt, y + yt);
+                            }
                         }
+
                     }
+                }
+                if (getCellAt(x, y).isBomb()) {
+
+                    onGameLoss();
+
 
                 }
             }
-            if (getCellAt(x, y).isBomb()) {
-                onGameLoss();
-
-
-            }
+            checkEnd();
         }
-        checkEnd();
 
 
     }
@@ -158,7 +161,7 @@ public class GameEngine  {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
                 getCellAt(x, y).setRevealed();
-
+                isGameOver = true;
             }
         }
 

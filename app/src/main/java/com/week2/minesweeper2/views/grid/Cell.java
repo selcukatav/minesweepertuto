@@ -25,6 +25,7 @@ public class Cell extends BaseCell implements View.OnClickListener, View.OnLongC
         setOnClickListener(this);
         setOnLongClickListener(this);
 
+
         //Log.i("TAG,", "cell"+x,y);
 
     }
@@ -47,7 +48,7 @@ public class Cell extends BaseCell implements View.OnClickListener, View.OnLongC
         //onLongClick, the event of clicking the button 1 sec or longer.
         GameEngine.getInstance().flag(getXPos(),getYPos());
 
-
+        //Log.i("Merhaba", "false");
         return true;
     }
     @Override
