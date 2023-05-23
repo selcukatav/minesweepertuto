@@ -41,6 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:onClick="restart"
+        android:text="OK"
         app:layout_constraintBottom_toBottomOf="@+id/bombCounter"
         app:layout_constraintEnd_toStartOf="@+id/timerTxt"
         app:layout_constraintStart_toEndOf="@+id/bombCounter"
