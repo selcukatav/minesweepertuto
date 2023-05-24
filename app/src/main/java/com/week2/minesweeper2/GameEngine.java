@@ -30,6 +30,7 @@ public class GameEngine  {
 
     public static boolean isGameOver = false;
 
+
     private Context context;
 
 
@@ -140,8 +141,9 @@ public class GameEngine  {
                 }
             }
         }
-        if (bombNotFound == 0 && notRevealed == 0) {
+        if ((bombNotFound == 0 && notRevealed == 0 )||BOMB_NUMBER==notRevealed) {
             Toast.makeText(context, "Game Won!", Toast.LENGTH_LONG).show();
+            isGameOver=true;
 
 
         }
