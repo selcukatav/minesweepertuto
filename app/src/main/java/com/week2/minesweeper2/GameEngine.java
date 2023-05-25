@@ -1,34 +1,30 @@
 package com.week2.minesweeper2;
-
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.util.Log;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.week2.minesweeper2.util.Generator;
 //import com.week2.minesweeper2.util.PrintGrid;
 import com.week2.minesweeper2.util.PrintGrid;
 import com.week2.minesweeper2.views.grid.Cell;
-import com.week2.minesweeper2.views.grid.Grid;
 
-
-import org.w3c.dom.Text;
-
-public class GameEngine  {
+public class GameEngine extends AppCompatActivity {
 
     private static GameEngine instance;
     public void setNumMines(int BOMB_NUMBER) {
         this.BOMB_NUMBER = BOMB_NUMBER;
     }
+
+    //public Views view1 = new Views();
+
+    public int bombNumberCounter;
     public int BOMB_NUMBER;
     public static int WIDTH = 6;
     public static int HEIGHT = 6;
 
-    public static boolean isGameOver = false;
+    public static boolean isGameOver, isGameWin = false;
 
 
     private Context context;
@@ -56,6 +52,7 @@ public class GameEngine  {
     public void createGrid(Context context) {
         this.context = context;
         isGameOver = false;
+        bombNumberCounter = instance.BOMB_NUMBER;
 
         //creating the grid and storing it
         int[][] generatedGrid = Generator.generate(BOMB_NUMBER, WIDTH, HEIGHT);
@@ -144,15 +141,23 @@ public class GameEngine  {
         if ((bombNotFound == 0 && notRevealed == 0 )||BOMB_NUMBER==notRevealed) {
             Toast.makeText(context, "Game Won!", Toast.LENGTH_LONG).show();
             isGameOver=true;
-
+            isGameWin = true;
 
         }
         return false;
     }
 
     public void flag(int x, int y) {
+
         //checks the cell if its flagged or not
         boolean isFlagged = getCellAt(x, y).isFlagged();
+
+        if (!isFlagged) {
+            bombNumberCounter --;
+        }else{
+            bombNumberCounter ++;
+        }
+
         getCellAt(x, y).setFlagged(!isFlagged);
         getCellAt(x, y).invalidate();
     }

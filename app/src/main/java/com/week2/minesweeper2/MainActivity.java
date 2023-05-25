@@ -19,10 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     public int BOMB_NUMBER=4;
 
-
     private int remainingMines;
     Grid grid;
-    TextView textView, bombCounter;
+    TextView textView, bombCounter_view;
     Runnable runnable;
     Handler handler;
     int number;
@@ -31,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gameplay);//MineSweeper Grid
-        bombCounter = findViewById(R.id.bombCounter);//Bomb counter text view component.
+
         textView = findViewById(R.id.timerTxt);//timer text view
 
         GameEngine.getInstance().createGrid(this);//creates grid on this activity.
 
-
+        bombCounter_view = findViewById(R.id.bombCounter);
         handler = new Handler(Looper.getMainLooper()); //handler and runnable: its like try catch func but in android.
         runnable = new Runnable() {
             @Override
@@ -45,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 if (GameEngine.isGameOver == false) {
                     textView.setText("" + number);
                     number++;
-                    textView.setText("" + number);
+
+                    bombCounter_view.setText("" + GameEngine.getInstance().bombNumberCounter);
                     handler.postDelayed(runnable, 1000);
                 }
             }
