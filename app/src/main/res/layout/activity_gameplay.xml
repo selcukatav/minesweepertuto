@@ -8,24 +8,27 @@
 
     <com.week2.minesweeper2.views.grid.Grid
         android:id="@+id/mineSweeperGridView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bombCounter">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112">
 
     </com.week2.minesweeper2.views.grid.Grid>
 
     <TextView
         android:id="@+id/timerTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="36dp"
         android:fontFamily="@font/digital_red"
         android:text="0"
         android:textAlignment="center"
@@ -33,36 +36,54 @@
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/mineSweeperGridView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/restartBtn"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/restartBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:onClick="restart"
-        app:layout_constraintBottom_toBottomOf="@+id/bombCounter"
-        app:layout_constraintEnd_toStartOf="@+id/timerTxt"
-        app:layout_constraintStart_toEndOf="@+id/bombCounter"
-        app:layout_constraintTop_toTopOf="@+id/bombCounter"
-        app:srcCompat="@drawable/restart" />
 
     <TextView
         android:id="@+id/bombCounter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="36dp"
         android:fontFamily="@font/digital_red"
         android:text="0"
         android:textAlignment="center"
         android:textColor="#FF0000"
         android:textSize="48sp"
         app:layout_constraintBottom_toTopOf="@+id/mineSweeperGridView"
-        app:layout_constraintEnd_toStartOf="@+id/restartBtn"
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="36dp"
+        android:onClick="restart"
+        app:layout_constraintBottom_toTopOf="@+id/mineSweeperGridView"
+        app:layout_constraintEnd_toStartOf="@+id/timerTxt"
+        app:layout_constraintStart_toEndOf="@+id/bombCounter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/restartbtn2" />
+
+    <Button
+        android:id="@+id/saveScoreBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="159dp"
+        android:layout_marginBottom="27dp"
+        android:enabled="false"
+        android:onClick="saveScore"
+        android:text="Skorunu Kaydet!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mineSweeperGridView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,4 +28,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
+    <ListView
+        android:id="@+id/scoreView"
+        android:layout_width="114dp"
+        android:layout_height="285dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="130dp"
+        android:layout_marginBottom="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scoreTxt" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
