@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -71,38 +72,45 @@ public class MainActivity extends AppCompatActivity {
     public void saveScore(View view) {
 
 
-        String remainingTime = textView.getText().toString();
-        int number = Integer.parseInt(remainingTime);
-        int bombNumber = GameEngine.getInstance().BOMB_NUMBER;
-        int score = bombNumber * 400 / number;
-        int MAX_SCORE_NUMBER = 8;
-        //gets the score data and stores it in shared preferences.
-        sharedPreferences = getSharedPreferences("com.week2.minesweeper2", Context.MODE_PRIVATE);
+        if (GameEngine.isGameWin==true) {
+            String remainingTime = textView.getText().toString();
+            int number = Integer.parseInt(remainingTime);
+            int bombNumber = GameEngine.getInstance().BOMB_NUMBER;
+            int score = bombNumber * 400 / number;
+            int MAX_SCORE_NUMBER = 8;
+            //gets the score data and stores it in shared preferences.
+            sharedPreferences = getSharedPreferences("com.week2.minesweeper2", Context.MODE_PRIVATE);
 
 
-        Set<String> scoreSet = sharedPreferences.getStringSet("scores", new HashSet<String>());
-        ArrayList<Integer> scores = new ArrayList<>();
-        for (String scoreString : scoreSet) {
-            scores.add(Integer.parseInt(scoreString));
+            Set<String> scoreSet = sharedPreferences.getStringSet("scores", new HashSet<String>());
+            ArrayList<Integer> scores = new ArrayList<>();
+            for (String scoreString : scoreSet) {
+                scores.add(Integer.parseInt(scoreString));
+            }
+            scores.add(score);
+
+            Collections.sort(scores, Collections.reverseOrder());
+
+            if (scores.size() > MAX_SCORE_NUMBER) {
+                scores = new ArrayList<>(scores.subList(0, MAX_SCORE_NUMBER));
+            }
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            scoreSet = new HashSet<>();
+            for (int scoreValue : scores) {
+                scoreSet.add(String.valueOf(scoreValue));
+            }
+            editor.putStringSet("scores", scoreSet);
+            editor.apply();
+            //sends data to ScoreTable.
+            Intent intent = new Intent(this, ScoreTable.class);
+            startActivity(intent);
+
+        }else{
+            Toast.makeText(this, "Lütfen önce oyunu kazanın!", Toast.LENGTH_LONG).show();
         }
-        scores.add(score);
 
-        Collections.sort(scores, Collections.reverseOrder());
 
-        if (scores.size() > MAX_SCORE_NUMBER) {
-            scores = new ArrayList<>(scores.subList(0, MAX_SCORE_NUMBER));
-        }
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        scoreSet = new HashSet<>();
-        for (int scoreValue : scores) {
-            scoreSet.add(String.valueOf(scoreValue));
-        }
-        editor.putStringSet("scores", scoreSet);
-        editor.apply();
-        //sends data to ScoreTable.
-        Intent intent = new Intent(this, ScoreTable.class);
-        startActivity(intent);
 
 
     }
