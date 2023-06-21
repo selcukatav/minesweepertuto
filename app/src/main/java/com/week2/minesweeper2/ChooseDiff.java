@@ -42,9 +42,6 @@ public class ChooseDiff extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
-
     public void goBack2(View view) {
         Intent intent = new Intent(ChooseDiff.this, MainMenu.class);
         startActivity(intent);

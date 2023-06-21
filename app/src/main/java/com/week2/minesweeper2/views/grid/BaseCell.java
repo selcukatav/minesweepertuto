@@ -90,9 +90,9 @@ public abstract class BaseCell extends View {
     }
 
 
-    public int getPosition() {
+    /*public int getPosition() {
         return position;
-    }
+    }*/
 
     public void setPosition(int x,int y) {
         this.x=x;

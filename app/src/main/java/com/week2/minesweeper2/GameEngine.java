@@ -18,23 +18,16 @@ public class GameEngine extends AppCompatActivity {
     }
 
     //public Views view1 = new Views();
-
     public int bombNumberCounter;
     public int BOMB_NUMBER;
     public static int WIDTH = 6;
     public static int HEIGHT = 6;
-
     public static boolean isGameOver, isGameWin = false;
-
-
     private Context context;
-
-
 
     public int getNumMines() {
         return BOMB_NUMBER;
     }
-
 
     private Cell[][] MineSweeperGrid = new Cell[WIDTH][HEIGHT];
 

@@ -44,6 +44,10 @@ public class MainMenu extends AppCompatActivity { //MAIN MENU
         Intent intent = new Intent(MainMenu.this, ScoreTable.class);
         startActivity(intent);
     }
+    public void goAbout(View view) { //if you press the button it sends you on the ChooseDiff screen.
+        Intent intent = new Intent(MainMenu.this, AboutActivity.class);
+        startActivity(intent);
+    }
 
 
 }

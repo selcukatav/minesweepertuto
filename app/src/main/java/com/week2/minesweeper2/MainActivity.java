@@ -110,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Lütfen önce oyunu kazanın!", Toast.LENGTH_LONG).show();
         }
 
-
-
-
     }
 
 

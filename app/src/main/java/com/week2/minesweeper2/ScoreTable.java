@@ -1,8 +1,6 @@
 package com.week2.minesweeper2;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.content.SharedPreferences;
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
